@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Watson</title>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div id="wrapper">
+        <section id="description">
+            <p>This showcases IBM's Watson Concept Expansion service.</p>
+              <ul>
+                <li>Watson Developer Cloud module</li>
+                <li>Express.js</li>
+                <li>Body Parser</li>
+                <li>Basic Routing with node.js</li>
+                <li>jQuery Ajax to send request to node server, parse response and modify DOM</li>
+              </ul>
+            </p>
+
+          <form>
+            <textarea placeholder="enter medical related words like 'aspipirin' or 'stethoscope'"id="concept" maxlength="300" ></textarea>
+            <input type="button" value="concepts" id="button">
+          </form>
+
+        </section>
+
+        <section id="output">
+          <ul>
+          </ul>
+        </section>
+
+        <script>
+      $('#button').click(function(){
+
+          var array = $('#concept').val().split(',');
+          // this will return an array with strings "1", "2", etc.
+          $.ajax({
+            method:'POST',
+            url:'',
+            data: {concept: array}
+          })
+
+          .done(function(data){
+            //empty ul for new return
+            $('#output ul').empty();
+
+            //loop through return array
+            $.each(data.return_seeds, function(element, value){
+              $('#output ul').append("<li>"+value.result+"</li>");
+            });
+
+          });
+
+        });
+        </script>
+      </div><!-- wrapper -->
+  </body>
+</html>
